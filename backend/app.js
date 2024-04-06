@@ -75,7 +75,21 @@ app.patch("/books/:id", async (req, res) => {
     if (!updatedBook)
       return res.status(400).send({ message: "Book not found!" });
 
-    return res.status(204).json(updatedBook);
+    return res.status(200).json(updatedBook);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+// Update a Book | PATCH request
+app.delete("/books/:id", async (req, res) => {
+  try {
+    const book = await Book.findByIdAndDelete(req.params.id);
+
+    if (!book) return res.status(400).send({ message: "Book not found!" });
+
+    return res.status(204).json(book);
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
