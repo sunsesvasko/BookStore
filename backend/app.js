@@ -1,5 +1,6 @@
 // === MODULES === //
 const express = require("express");
+const cors = require("cors");
 
 const bookRoutes = require("./routes/bookRoutes");
 const globalErrorHandler = require("./controllers/errorController");
@@ -10,8 +11,18 @@ const Book = require("./models/bookModel");
 // === SETUP === //
 const app = express();
 
+// Middleware for parsing req.body
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+
+// Middleware for handling CORS Policy
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 // === ROUTES === //
 
