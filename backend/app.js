@@ -43,7 +43,24 @@ app.get("/books", async (req, res) => {
   try {
     const books = await Book.find();
 
-    return res.status(201).send(books);
+    return res.status(201).json({
+      length: books.length,
+      data: books,
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+// Get Book by ID from DB | GET request
+app.get("/books/:id", async (req, res) => {
+  try {
+    const book = await Book.findById({ _id: req.params.id });
+
+    if (!book) return res.status(400).send({ message: "Book not found!" });
+
+    return res.status(201).json(book);
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
