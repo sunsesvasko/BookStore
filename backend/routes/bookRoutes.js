@@ -7,3 +7,5 @@ router
   .route("/")
   .get(bookController.getAllBooks)
   .post(bookController.createBook);
+
+module.exports = router;
