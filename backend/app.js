@@ -43,7 +43,7 @@ app.get("/books", async (req, res) => {
   try {
     const books = await Book.find();
 
-    return res.status(201).json({
+    return res.status(200).json({
       length: books.length,
       data: books,
     });
@@ -60,7 +60,22 @@ app.get("/books/:id", async (req, res) => {
 
     if (!book) return res.status(400).send({ message: "Book not found!" });
 
-    return res.status(201).json(book);
+    return res.status(200).json(book);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+// Update a Book | PATCH request
+app.patch("/books/:id", async (req, res) => {
+  try {
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body);
+
+    if (!updatedBook)
+      return res.status(400).send({ message: "Book not found!" });
+
+    return res.status(204).json(updatedBook);
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
