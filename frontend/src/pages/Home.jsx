@@ -27,7 +27,7 @@ const Home = () => {
     <div className="p-4">
       <div className="flex items-center justify-between">
         <h1 className="my-8 text-3xl ">Books List</h1>
-        <Link>
+        <Link to="/books/create">
           <MdOutlineAddBox className="text-4xl text-sky-800" />
         </Link>
         {loading ? (
