@@ -23,9 +23,9 @@ app.use(cors());
 app.use("/api/books", bookRoutes);
 
 // Other Routes
-app.all("*", (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
-});
+// app.all("*", (req, res, next) => {
+//   next(new AppError(`Can't find ${req.originalUrl} on this server!`), 404);
+// });
 
 // PRODUCTION
 if (process.env.NODE_ENV === "production") {
