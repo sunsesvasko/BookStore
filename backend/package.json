@@ -4,7 +4,7 @@
   "description": "A Book Store using the MERN Stack & Technologies",
   "main": "server.js",
   "scripts": {
-    "start": "supervisor server.js"
+    "start": "node server.js"
   },
   "author": "Vasko Blazhev",
   "license": "ISC",
