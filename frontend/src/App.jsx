@@ -9,6 +9,7 @@ import DeleteBook from "./pages/DeleteBook";
 const App = () => {
   return (
     <Routes>
+      <Route index element={<Home />} />
       <Route path="/" element={<Home />} />
       <Route path="/books/create" element={<CreateBook />} />
       <Route path="/books/details/:id" element={<ShowBook />} />
