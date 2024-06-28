@@ -1,6 +1,7 @@
 // === MODULES === //
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const bookRoutes = require("./routes/bookRoutes");
 const globalErrorHandler = require("./controllers/errorController");
@@ -42,5 +43,15 @@ app.all("*", (req, res, next) => {
 
 // Global Error Handler
 app.use(globalErrorHandler);
+
+// PRODUCTION
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+  );
+}
 
 module.exports = app;
